@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.HashMap;
 
 public class MST implements MSTinterface{
     static class Edge{
@@ -28,7 +29,7 @@ public class MST implements MSTinterface{
         int find_set(int v) {
             if (v == par[v])
                 return v;
-            return par[v] = find_set(parent[v]);
+            return par[v] = find_set(par[v]);
         }
         boolean union_sets(int a, int b) {
             a = find_set(a);
@@ -39,7 +40,7 @@ public class MST implements MSTinterface{
                     a = b;
                     b = t;
                 }
-                parent[b] = a;
+                par[b] = a;
                 quantity[a] += quantity[b];
                 return true;
             }
@@ -81,12 +82,20 @@ public class MST implements MSTinterface{
         }
     }
 
-    public void add_graph(String name, int n){
+    HashMap<String, Graph> map = new HashMap<>();
 
+    public void add_graph(String name, int n){
+        if(map.containsKey(name)) {
+            System.out.println("The graph with similar id already exists :( ");
+            return;
+        }
+        Graph graph = new Graph(n);
+        map.put(name, graph);
+        return;
     }
 
     public void add_edge(String name, int u, int v, int w){
-
+        
     }
 
     public int get_mst(String name){
