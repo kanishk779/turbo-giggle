@@ -58,6 +58,26 @@ public class MST implements MSTinterface{
             for(int i=0; i < adj.size(); i++){
                 pq.add(adj.get(i));
             }
+            int edges_added = 0;
+            int ans = 0;
+            while(true){
+                Edge edge = pq.poll();
+                if(edge == null)
+                    break;
+                int u = edge.s;
+                int v = edge.d;
+                int w = edge.w;
+                if(union_sets(u, v)){
+                    ans += w;
+                    edges_added += 1;
+                }
+                if(edges_added == n-1)
+                    break;
+            }
+            if(edges_added < n-1)
+                return -1;
+            else
+                return ans;
         }
     }
 
