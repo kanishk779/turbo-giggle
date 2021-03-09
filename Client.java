@@ -8,7 +8,7 @@ public class Client{
     public static void main(String args[]){
         try {
             // Getting the registry
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 2001);
+            Registry registry = LocateRegistry.getRegistry(args[0], Integer.parseInt(args[1]));
 
             // Looking up the registry for the remote object
             MSTinterface stub = (MSTinterface) registry.lookup("MSTinterface");
@@ -17,7 +17,6 @@ public class Client{
 
             while (scanner.hasNextLine()){
                 String cmd = scanner.nextLine();
-                System.out.println(cmd);
                 String[] arr = cmd.split(" ");
 
                 if(arr[0].equals("add_graph")){
