@@ -23,7 +23,7 @@ public class MST implements MSTinterface{
         }
 
         public void add_edge(int u, int v, int w){
-            Edge curr_edge = new Edge(u, v, w);
+            Edge curr_edge = new Edge(u-1, v-1, w);
             adj.add(curr_edge);
         }
         int find_set(int v) {

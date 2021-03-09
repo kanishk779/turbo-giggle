@@ -14,10 +14,10 @@ public class Server extends MST{
             MSTinterface stub = (MSTinterface) UnicastRemoteObject.exportObject(obj, 0);
 
             // Binding the remote object (stub) in the registry
-            Registry registry = LocateRegistry.getRegistry();
-
+            LocateRegistry.createRegistry(2001);
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 2001);
             registry.bind("MSTinterface", stub);
-            System.err.println("Server ready");
+            System.out.println("Server ready");
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
