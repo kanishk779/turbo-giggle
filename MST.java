@@ -15,7 +15,8 @@ public class MST implements MSTinterface{
     static class Graph{
         int n;
         ArrayList<Edge> adj = new ArrayList<>();
-
+        int [] par;
+        int [] quantity;
         public Graph(int n){
             this.n = n;
         }
@@ -24,13 +25,36 @@ public class MST implements MSTinterface{
             Edge curr_edge = new Edge(u, v, w);
             adj.add(curr_edge);
         }
-
+        int find_set(int v) {
+            if (v == par[v])
+                return v;
+            return par[v] = find_set(parent[v]);
+        }
+        boolean union_sets(int a, int b) {
+            a = find_set(a);
+            b = find_set(b);
+            if (a != b) {
+                if (quantity[a] < quantity[b]) {
+                    int t = a;
+                    a = b;
+                    b = t;
+                }
+                parent[b] = a;
+                quantity[a] += quantity[b];
+                return true;
+            }
+            return false;
+        }
         public int give_mst(){
             if(adj.size() == 0 || adj.size() == 1)
                 return 0;
-            PriorityQueue<Edge> pq = new PriorityQueue<>(adj.size(), Comparator.comparingInt(o -> o.weight));
-            int par = new int[n];
-
+            PriorityQueue<Edge> pq = new PriorityQueue<>(adj.size(), Comparator.comparingInt(o -> o.w));
+            par = new int[n];
+            quantity = new int[n];
+            for (int i=0; i<n; i++){
+                par[i] = i;
+                quantity[i] = 1;
+            }
             for(int i=0; i < adj.size(); i++){
                 pq.add(adj.get(i));
             }
