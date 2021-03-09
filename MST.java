@@ -99,7 +99,7 @@ public class MST implements MSTinterface{
             System.out.println("The graph with this id does not exists :( ");
             return;
         }
-        Graph graph = map.peek(name);
+        Graph graph = map.get(name);
         graph.add_edge(u, v, w);
         map.put(name, graph);
         return;
@@ -108,9 +108,9 @@ public class MST implements MSTinterface{
     public int get_mst(String name){
         if(map.containsKey(name) == false) {
             System.out.println("The graph with this id does not exists :( ");
-            return;
+            return -1;
         }
-        Graph graph = map.peek(name);
+        Graph graph = map.get(name);
         return graph.give_mst();
     }
 }
