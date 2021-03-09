@@ -47,8 +47,10 @@ public class MST implements MSTinterface{
             return false;
         }
         public int give_mst(){
-            if(adj.size() == 0 || adj.size() == 1)
+            if(n == 0 || n == 1)
                 return 0;
+            if(adj.size() == 0)
+                return -1;
             PriorityQueue<Edge> pq = new PriorityQueue<>(adj.size(), Comparator.comparingInt(o -> o.w));
             par = new int[n];
             quantity = new int[n];
