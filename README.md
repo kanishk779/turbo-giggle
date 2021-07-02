@@ -1,5 +1,7 @@
 # turbo-giggle
 JAVA RMI (MST - graph algorithm)
+This project was done as part of the distributed systems course. The objective
+as to understand how **Remote Method Invocation** works.
 
 ## How to run
 ```
